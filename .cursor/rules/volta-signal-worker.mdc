@@ -1,0 +1,13 @@
+---
+description: Guardrails when editing the Volta Signal Worker
+globs: volta-signal/**/*.ts,volta-signal/**/*.toml,volta-signal/**/*.sql
+alwaysApply: false
+---
+
+# Volta Signal Worker
+
+- `volta-signal/` is the send path. Do not add send to the Next.js studio.
+- Never put secrets in `wrangler.toml`, logs, Slack, or `/architecture`.
+- Do not enable sources that are not already in `src/sources.ts`.
+- Send test is Mailchimp test. Approve and send is the list send and needs `LIVE_SEND_ENABLED`.
+- Point at existing files instead of copying their contents into rules or skills.

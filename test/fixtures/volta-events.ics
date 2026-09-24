@@ -1,0 +1,39 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Volta//Events//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:evt-founder-office-hours@voltaeffect.com
+SUMMARY:Founder Office Hours
+DTSTART;TZID=America/Halifax:20260910T130000
+DTEND;TZID=America/Halifax:20260910T150000
+LOCATION:Volta\, 1505 Barrington St\, Halifax
+DESCRIPTION:Book a 30 minute session with a Volta advisor. Register to
+  reserve a slot.
+URL:https://voltaeffect.com/events/founder-office-hours
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-ai-showcase@voltaeffect.com
+SUMMARY:AI Residency Showcase
+DTSTART;TZID=America/Halifax:20260924T173000
+DTEND;TZID=America/Halifax:20260924T200000
+LOCATION:Volta Halifax
+DESCRIPTION:Residency teams demo what they built this cohort.
+URL:https://voltaeffect.com/events/ai-residency-showcase
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-past-demo@voltaeffect.com
+SUMMARY:August Demo Night
+DTSTART;TZID=America/Halifax:20260812T180000
+DTEND;TZID=America/Halifax:20260812T203000
+DESCRIPTION:Last month's demo night.
+URL:https://voltaeffect.com/events/august-demo-night
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-all-day@voltaeffect.com
+SUMMARY:Volta Community Day
+DTSTART;VALUE=DATE:20260918
+DESCRIPTION:An open house for the whole community.
+URL:https://voltaeffect.com/events/community-day
+END:VEVENT
+END:VCALENDAR

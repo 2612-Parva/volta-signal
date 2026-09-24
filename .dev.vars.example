@@ -1,0 +1,34 @@
+# Copy to .dev.vars for local development. Never commit the real file.
+# In staging/production use `wrangler secret put <NAME>` instead.
+
+# --- Draft path (public sources -> three variants). Minimum to run anything.
+LLM_API_KEY=
+LLM_MODEL=gpt-4o-mini
+# Optional: any OpenAI-compatible endpoint.
+LLM_BASE_URL=https://api.openai.com/v1
+
+# --- Slack review path
+SLACK_BOT_TOKEN=
+SLACK_SIGNING_SECRET=
+SLACK_REVIEW_CHANNEL_ID=
+SLACK_APPROVER_IDS=U123,U456
+
+# --- Preview links
+PREVIEW_SIGNING_SECRET=
+
+# --- Manual runs (staging only; /admin/* is disabled in production)
+ADMIN_RUN_SECRET=
+
+# --- Email provider (Mailchimp). Test send needs only the test audience.
+ESP_API_KEY=
+ESP_TEST_AUDIENCE_ID=
+ESP_AUDIENCE_ID=
+# Reserved. Not used yet: inserting into a Mailchimp template needs that
+# template's section names. Leave blank and this system renders the full email.
+ESP_TEMPLATE_ID=
+ESP_FROM_NAME=Volta
+ESP_REPLY_TO=
+
+# --- Editorial
+# Quarterly call to action from Matt. A URL here is also allowed in variants.
+PRIMARY_CTA=

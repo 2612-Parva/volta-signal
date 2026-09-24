@@ -1,0 +1,22 @@
+{
+  "name": "volta-signal",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Monthly editorial operations system for the Volta founders newsletter.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json",
+    "test": "node --test --experimental-strip-types --experimental-sqlite --no-warnings \"test/*.test.ts\"",
+    "migrate:local": "wrangler d1 migrations apply volta_signal --local",
+    "migrate:remote": "wrangler d1 migrations apply volta_signal --remote",
+    "check": "npm run typecheck && npm run test"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260921.1",
+    "@types/node": "^22.20.4",
+    "typescript": "^5.6.3",
+    "wrangler": "^4.136.1"
+  }
+}

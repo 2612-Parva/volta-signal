@@ -1,0 +1,102 @@
+name = "volta-signal"
+main = "src/index.ts"
+compatibility_date = "2025-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Cron is UTC-only, so the worker fires often and a Halifax-local guard in
+# src/schedule.ts decides whether the monthly stage actually runs.
+[triggers]
+crons = ["*/30 * * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "volta_signal"
+database_id = "5d565ec9-8a83-4a3e-9ef2-4ae93e78ad7c"
+migrations_dir = "migrations"
+
+[vars]
+ENVIRONMENT = "development"
+APP_BASE_URL = "http://localhost:8787"
+CADENCE = "monthly"
+TIMEZONE = "America/Halifax"
+# "first-monday" | "first-tuesday" | ... | a day-of-month number such as "2"
+PUBLISH_DAY = "first-monday"
+PUBLISH_LOCAL_TIME = "07:30"
+COLLECT_DAY = "1"
+COLLECT_LOCAL_TIME = "16:00"
+METRICS_EARLY_AFTER_HOURS = "28"
+METRICS_SETTLED_AFTER_HOURS = "168"
+LLM_MODEL = "openai/gpt-oss-120b"
+LLM_BASE_URL = "https://api.groq.com/openai/v1"
+ESP_FROM_NAME = "Volta"
+PRIMARY_CTA = ""
+LIVE_SEND_ENABLED = "false"
+
+# Secrets (set with `wrangler secret put <NAME>`, never in this file):
+#   SLACK_BOT_TOKEN, SLACK_SIGNING_SECRET, SLACK_REVIEW_CHANNEL_ID, SLACK_APPROVER_IDS,
+#   LLM_API_KEY, ESP_API_KEY, ESP_AUDIENCE_ID, ESP_TEST_AUDIENCE_ID, ESP_TEMPLATE_ID,
+#   ESP_REPLY_TO, PREVIEW_SIGNING_SECRET, ADMIN_RUN_SECRET
+
+# Wrangler does not inherit `d1_databases`, `vars`, or `triggers` into named
+# environments, so each one repeats them in full.
+
+[env.staging]
+name = "volta-signal-staging"
+workers_dev = true
+
+[env.staging.triggers]
+crons = ["*/30 * * * *"]
+
+# Staging writes issue state, so it needs its own database:
+#   npx wrangler d1 create volta_signal_staging
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "volta_signal_staging"
+database_id = "8b917ad2-a2d3-46e8-8b90-805c9f1e0597"
+migrations_dir = "migrations"
+
+[env.staging.vars]
+ENVIRONMENT = "staging"
+APP_BASE_URL = "https://volta-signal-staging.volta-signal.workers.dev"
+CADENCE = "monthly"
+TIMEZONE = "America/Halifax"
+PUBLISH_DAY = "first-monday"
+PUBLISH_LOCAL_TIME = "07:30"
+COLLECT_DAY = "1"
+COLLECT_LOCAL_TIME = "16:00"
+METRICS_EARLY_AFTER_HOURS = "28"
+METRICS_SETTLED_AFTER_HOURS = "168"
+LLM_MODEL = "openai/gpt-oss-120b"
+LLM_BASE_URL = "https://api.groq.com/openai/v1"
+ESP_FROM_NAME = "Volta"
+PRIMARY_CTA = ""
+LIVE_SEND_ENABLED = "true"
+
+[env.production]
+name = "volta-signal-production"
+
+[env.production.triggers]
+crons = ["*/30 * * * *"]
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "volta_signal"
+database_id = "5d565ec9-8a83-4a3e-9ef2-4ae93e78ad7c"
+migrations_dir = "migrations"
+
+[env.production.vars]
+ENVIRONMENT = "production"
+APP_BASE_URL = "https://volta-signal-production.volta-signal.workers.dev"
+CADENCE = "monthly"
+TIMEZONE = "America/Halifax"
+PUBLISH_DAY = "first-monday"
+PUBLISH_LOCAL_TIME = "07:30"
+COLLECT_DAY = "1"
+COLLECT_LOCAL_TIME = "16:00"
+METRICS_EARLY_AFTER_HOURS = "28"
+METRICS_SETTLED_AFTER_HOURS = "168"
+LLM_MODEL = "openai/gpt-oss-120b"
+LLM_BASE_URL = "https://api.groq.com/openai/v1"
+ESP_FROM_NAME = "Volta"
+PRIMARY_CTA = ""
+LIVE_SEND_ENABLED = "false"

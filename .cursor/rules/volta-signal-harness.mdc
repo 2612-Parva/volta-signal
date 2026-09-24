@@ -1,0 +1,13 @@
+---
+description: How to write Cursor skills, rules, memory, and logs for Volta Signal
+globs: "**/*.md,**/*.mdc,.cursor/**"
+alwaysApply: false
+---
+
+# Harness files
+
+- Skills: `SKILL.md` with `name` and `description`. Steps only. No API dumps or copied source.
+- Rules: `.mdc` in `.cursor/rules/`. One concern, under 50 lines. Reference files with `@path`.
+- Hooks: `.cursor/hooks.json` plus a small script. Deterministic gates, not prose.
+- Memory: durable facts only. No procedures.
+- Logs: what ran. Not a playbook.
